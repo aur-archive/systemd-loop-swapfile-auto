@@ -1,0 +1,13 @@
+[Unit]
+Description=Mount the swap file via a loop device
+After=local-fs.target
+Before=swap.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/systemd/scripts/systemd-loop-swapfile.sh start
+ExecStop=/usr/lib/systemd/scripts/systemd-loop-swapfile.sh stop
+
+[Install]
+Alias=local-fs.target.wants/systemd-loop-swapfile.service
